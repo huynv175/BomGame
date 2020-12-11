@@ -82,11 +82,11 @@ public class Game {
         stackPane.setMinSize(200, 200);
         stackPane.setLayoutX(200);
         stackPane.setLayoutY(200);
-        stackPane.setStyle("-fx-background-color:white; -fx-background-radius:30");
+        stackPane.setStyle("-fx-background-color:pink; -fx-background-radius:30");
         Label label = new Label("You die!");
         label.setFont(new Font(30));
         label.setTranslateY(-35);
-        Button buttonOK = new Button("OK");
+        Button buttonOK = new Button("You win");
         buttonOK.setFont(new Font(30));
         buttonOK.setTranslateY(50);
         buttonOK.setMaxWidth(200);
@@ -186,7 +186,7 @@ public class Game {
                         Musics.win.stop();
                         Musics.win.play();
                         isWin = true;
-                        label.setText("You win!");
+                        label.setText("level 2");
                         anchorPane.getChildren().add(stackPane);
                     }
 

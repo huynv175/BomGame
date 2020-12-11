@@ -29,7 +29,7 @@ public class Images {
         Images.wall = new Image(Images.class.getResource("/res/image/wall.png").toExternalForm());
         Images.brick = new Image(Images.class.getResource("/res/image/brick.png").toExternalForm());
         Images.bomb = new Image(Images.class.getResource("/res/image/bomb.png").toExternalForm());
-        Images.oneal = new Image(Images.class.getResource("/res/image/oneal_left1.png").toExternalForm());
+        Images.oneal = new Image(Images.class.getResource("/res/image/oneal2.png").toExternalForm());
 
         Images.win = new Image(Images.class.getResource("/res/image/win.png").toExternalForm());
         Images.item_bom = new Image(Images.class.getResource("/res/image/powerup_bombs.png").toExternalForm());
