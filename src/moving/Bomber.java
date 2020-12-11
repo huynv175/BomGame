@@ -7,10 +7,10 @@ import screen.Game;
 import staticObj.Item;
 
 public class Bomber extends Char {
+
     public Bomber() {
 
     }
-
     public Bomber(Image image, int x, int y) {
         this.image = image;
         this.x = x;
@@ -66,6 +66,14 @@ public class Bomber extends Char {
         return false;
     }
 
+    public boolean onealAttack(Oneal oneal) {
+        Rectangle me =
+                new Rectangle(x + 1, y + 1, 28, 28);
+        if (me.intersects(oneal.x, oneal.y, 30, 30)) {
+            return true;
+        }
+        return false;
+    }
     public boolean pickItem(Item item) {
         Rectangle me =
                 new Rectangle(x + 1, y + 1, 28, 28);
@@ -74,7 +82,6 @@ public class Bomber extends Char {
         }
         return false;
     }
-
 
 
 }

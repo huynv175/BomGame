@@ -24,13 +24,13 @@ public class Musics {
     }
 
     public static void initMusics() {
-        Musics.enemy_die = createMusicOne("/resources/music/enemy_die.wav");
-        Musics.bombang = createMusicOne("/resources/music/bomb_bang.wav");
-        Musics.bomber_die = createMusicOne("/resources/music/bomber_die.wav");
-        Musics.new_bom = createMusicOne("/resources/music/putBomb.wav");
-        Musics.win = createMusicOne("/resources/music/win.wav");
-        Musics.pickItem = createMusicOne("/resources/music/pickItem.wav");
-        Musics.game = createMusic("/resources/music/stage.wav");
+        Musics.enemy_die = createMusicOne("/res/music/enemy_die.wav");
+        Musics.bombang = createMusicOne("/res/music/bomb_bang.wav");
+        Musics.bomber_die = createMusicOne("/res/music/bomber_die.wav");
+        Musics.new_bom = createMusicOne("/res/music/putBomb.wav");
+        Musics.win = createMusicOne("/res/music/win.wav");
+        Musics.pickItem = createMusicOne("/res/music/pickItem.wav");
+        Musics.game = createMusic("/res/music/stage.wav");
     }
 
 

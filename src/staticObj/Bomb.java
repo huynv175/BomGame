@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class Bomb extends StaticObj {
     public int timeBomb;
+    public int sizeofFlame = 1;
 
     public Bomb() {
     }

@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import moving.Oneal;
 import sample.Images;
 import sample.Musics;
 import staticObj.Bomb;
@@ -32,6 +33,7 @@ public class Game {
 
     Bomber bomber;
     List<Enemy> aEnemy = new ArrayList<>();
+    List<Oneal> aOneal = new ArrayList<>();
     List<Wall> aWall = new ArrayList<>();
     List<Brick> aBrick = new ArrayList<>();
     List<Item> aItem = new ArrayList<>();
@@ -68,12 +70,13 @@ public class Game {
         buttonRS.setLayoutX(549);
         buttonRS.setStyle("-fx-text-fill: white");
 
+        //Diem
         labelScore.setFont(new Font(20));
         labelScore.setStyle("-fx-text-fill: white;");
         paneInfo.getChildren().addAll(buttonRS, labelScore);
         anchorPane.getChildren().addAll(paneInfo);
 
-        // dialog die or win
+        // die or win
         StackPane stackPane = new StackPane();
         stackPane.setMaxSize(200, 200);
         stackPane.setMinSize(200, 200);
@@ -136,7 +139,17 @@ public class Game {
                                 Musics.enemy_die.play();
                             }
                         }
-
+                        for (int i = 0; i < aOneal.size(); i++) {
+                            Oneal oneal = aOneal.get(i);
+                            if (oneal.bombBangDie(bomb)) {
+                                score += 10;
+                                oneal.isDie = true;
+                                aOneal.remove(i);
+                                i--;
+                                Musics.enemy_die.stop();
+                                Musics.enemy_die.play();
+                            }
+                        }
                         if (bomb.timeBomb > 5 && !bomber.isDie && bomber.bombBangDie(bomb)) {
                             Musics.bomber_die.stop();
                             Musics.bomber_die.play();
@@ -169,7 +182,7 @@ public class Game {
                         aItem.remove(i);
                         i--;
                     }
-                    if (bomber.pickItem(item) && item.type == 3 && !isWin && aEnemy.size() == 0) {
+                    if (bomber.pickItem(item) && item.type == 3 && !isWin && aEnemy.size() == 0 && aOneal.size() == 0) {
                         Musics.win.stop();
                         Musics.win.play();
                         isWin = true;
@@ -183,9 +196,20 @@ public class Game {
                     for (int i = 0; i < aEnemy.size(); i++) {
                         aEnemy.get(i).autoMove(bomb);
                     }
+                    for (int i = 0; i < aOneal.size(); i++) {
+                        aOneal.get(i).autoMove(bomb);
+                    }
                 }
                 for (int i = 0; i < aEnemy.size(); i++) {
                     if (!bomber.isDie && bomber.enemyAttack(aEnemy.get(i))) {
+                        anchorPane.getChildren().add(stackPane);
+                        bomber.speed = 0;
+                        bomber.image = Images.bomber[4];
+                        bomber.isDie = true;
+                    }
+                }
+                for (int i = 0; i < aOneal.size(); i++) {
+                    if (!bomber.isDie && bomber.onealAttack(aOneal.get(i))) {
                         anchorPane.getChildren().add(stackPane);
                         bomber.speed = 0;
                         bomber.image = Images.bomber[4];
@@ -243,6 +267,7 @@ public class Game {
                         }
                         break;
                 }
+
             }
         });
 
@@ -283,6 +308,9 @@ public class Game {
             enemy.paint(gc);
         }
 
+        for (Oneal oneal : aOneal) {
+            oneal.paint(gc);
+        }
 
         bomber.paint(gc);
         if (bomb.timeBomb > 0) {
@@ -297,6 +325,7 @@ public class Game {
 
     }
 
+
     /**
      * Tạo map từ file.
      */
@@ -307,7 +336,7 @@ public class Game {
             }
         }
         try {
-            String text = Game.class.getResource("/resources/map/map").toString();
+            String text = Game.class.getResource("/res/map/map").toString();
             FileReader fr = new FileReader(text.substring(6, text.length()));
             BufferedReader br = new BufferedReader(fr);
             String line;
@@ -328,6 +357,12 @@ public class Game {
                         Enemy enemy = new Enemy(Images.enemy, j * 30, i * 30);
                         aEnemy.add(enemy);
                     }
+                    if (line.codePointAt(j) == 79) {
+                        dataMap[i][j] = 3;
+                        Oneal oneal = new Oneal(Images.oneal, j * 30, i * 30, bomber);
+                        aOneal.add(oneal);
+                    }
+
                     if (line.codePointAt(j) == 66) {
                         dataMap[i][j] = 4;
                         Brick brick = new Brick(Images.brick, j * 30, i * 30);

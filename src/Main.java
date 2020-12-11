@@ -14,11 +14,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        load();
+        runGame();
         launch(args);
     }
 
-    public static void load() {
+    public static void runGame() {
         Images.initImages();
         Musics.initMusics();
     }

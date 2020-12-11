@@ -5,16 +5,11 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import screen.Game;
 import staticObj.Bomb;
-
 import java.util.Random;
 
 public class Enemy extends Char {
     public boolean moveX;
     public boolean changeDirection;
-
-    public Enemy() {
-
-    }
 
     public Enemy(Image image, int x, int y) {
         this.image = image;
@@ -23,6 +18,7 @@ public class Enemy extends Char {
         this.speed = 2;
         this.moveX = new Random().nextBoolean(); // random di chuyển dọc or ngang
     }
+
 
     @Override
     public void paint(GraphicsContext gc) {
@@ -59,10 +55,48 @@ public class Enemy extends Char {
         return true;
     }
 
+
     /**
      * Tự động di chuyển, bị cản đường sẽ quay đầu.
      */
     public void autoMove(Bomb bomb) {
+//        if (this.moveX) {
+//            if (this.x < bomber.x) {
+//                System.out.println("this.x < bomber.x");
+//                if (this.canMove(this.x + this.speed, this.y, bomb)) {
+//                    this.move(this.x + this.speed, this.y);
+//                    return;
+//                } else moveX = !moveX;
+//            } else if (this.x > bomber.x) {
+//                System.out.println("this.x > bomber.x");
+//                if (this.canMove(this.x - this.speed, this.y, bomb)) {
+//                    this.move(this.x - this.speed, this.y);
+//                    return;
+//                } moveX = !moveX;
+//            } else if (this.x == bomber.x) {
+//                System.out.println("x==x");
+//                moveX = !moveX;
+//                return;
+//            }
+//        } else {
+//            if (this.y < bomber.y) {
+//                System.out.println("this.y < bomber.y");
+//                if (this.canMove(this.x, this.y + this.speed, bomb)) {
+//                    this.move(this.x, this.y + this.speed);
+//                    return;
+//                } moveX = !moveX;
+//            } else if (this.y > bomber.y) {
+//                System.out.println("this.y > bomber.y");
+//                if (this.canMove(this.x, this.y - this.speed, bomb)) {
+//                    this.move(this.x, this.y - this.speed);
+//                    return;
+//                } moveX = !moveX;
+//            } else if (this.y == bomber.y) {
+//                System.out.println("y==y");
+//                moveX = !moveX;
+//                return;
+//            }
+//        }
         if (this.moveX) {
             if (!this.changeDirection) {
                 if (this.canMove(this.x + this.speed, this.y, bomb)) {
