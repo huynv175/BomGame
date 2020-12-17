@@ -86,7 +86,7 @@ public class Game {
         Label label = new Label("You die!");
         label.setFont(new Font(30));
         label.setTranslateY(-35);
-        Button buttonOK = new Button("You win");
+        Button buttonOK = new Button("Next time");
         buttonOK.setFont(new Font(30));
         buttonOK.setTranslateY(50);
         buttonOK.setMaxWidth(200);
